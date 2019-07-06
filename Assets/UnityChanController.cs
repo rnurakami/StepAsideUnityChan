@@ -13,7 +13,10 @@ public class UnityChanController : MonoBehaviour
 
     private float turnForce = 500.0f;
 
+    private float upForce = 500.0f;
+
     private float movableRange = 3.4f;
+
 
     void Start()
     {
@@ -35,6 +38,17 @@ public class UnityChanController : MonoBehaviour
         else if (Input.GetKey(KeyCode.RightArrow) && this.movableRange > this.transform.position.x)
         {
             this.myRidgebody.AddForce(this.turnForce, 0, 0);
+        }
+
+        if (this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        {
+            this.myAnimator.SetBool("Jump", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && this.transform.position.y < 0.5f)
+        {
+            this.myAnimator.SetBool("Jump", true);
+            this.myRidgebody.AddForce(this.transform.up * this.upForce);
         }
 
     }
