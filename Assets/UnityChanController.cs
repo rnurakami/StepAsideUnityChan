@@ -78,5 +78,10 @@ public class UnityChanController : MonoBehaviour
         {
             this.isEnd = true;
         }
+
+        if (other.gameObject.tag == "CoinTag")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
