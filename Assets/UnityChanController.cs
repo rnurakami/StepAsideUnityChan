@@ -24,6 +24,10 @@ public class UnityChanController : MonoBehaviour
 
     private GameObject stateText;
 
+    private GameObject scoreText;
+
+    private int score = 0;
+
 
     void Start()
     {
@@ -33,6 +37,7 @@ public class UnityChanController : MonoBehaviour
         this.myRidgebody = GetComponent<Rigidbody>();
 
         this.stateText = GameObject.Find("GameResultText");
+        this.scoreText = GameObject.Find("ScoreText");
     }
 
     void Update()
@@ -87,6 +92,10 @@ public class UnityChanController : MonoBehaviour
 
         if (other.gameObject.tag == "CoinTag")
         {
+            this.score += 10;
+
+            this.scoreText.GetComponent<Text>().text = "Score " + this.score + "pt";
+
             GetComponent<ParticleSystem>().Play();
             Destroy(other.gameObject);
         }
