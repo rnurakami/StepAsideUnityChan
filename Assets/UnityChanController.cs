@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnityChanController : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class UnityChanController : MonoBehaviour
 
     private bool isEnd = false;
 
+    private GameObject stateText;
+
 
     void Start()
     {
@@ -29,6 +32,7 @@ public class UnityChanController : MonoBehaviour
 
         this.myRidgebody = GetComponent<Rigidbody>();
 
+        this.stateText = GameObject.Find("GameResultText");
     }
 
     void Update()
@@ -72,11 +76,13 @@ public class UnityChanController : MonoBehaviour
             other.gameObject.tag == "TrafficConeTag")
         {
             this.isEnd = true;
+            this.stateText.GetComponent<Text>().text = "GAME OVER";
         }
 
         if (other.gameObject.tag == "GoalTag")
         {
             this.isEnd = true;
+            this.stateText.GetComponent<Text>().text = "CLEAR!!";
         }
 
         if (other.gameObject.tag == "CoinTag")
