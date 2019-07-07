@@ -17,6 +17,10 @@ public class UnityChanController : MonoBehaviour
 
     private float movableRange = 3.4f;
 
+    private float coefficent = 0.95f;
+
+    private bool isEnd = false;
+
 
     void Start()
     {
@@ -29,6 +33,15 @@ public class UnityChanController : MonoBehaviour
 
     void Update()
     {
+
+        if (this.isEnd)
+        {
+            this.forwardForce *= this.coefficent;
+            this.turnForce *= this.coefficent;
+            this.upForce *= this.coefficent;
+            this.myAnimator.speed *= this.coefficent;
+        }
+        
         this.myRidgebody.AddForce(this.transform.forward * this.forwardForce);
 
         if (Input.GetKey(KeyCode.LeftArrow) && -this.movableRange < this.transform.position.x)
@@ -51,5 +64,19 @@ public class UnityChanController : MonoBehaviour
             this.myRidgebody.AddForce(this.transform.up * this.upForce);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "CarTag" ||
+            other.gameObject.tag == "TrafficConeTag")
+        {
+            this.isEnd = true;
+        }
+
+        if (other.gameObject.tag == "GoalTag")
+        {
+            this.isEnd = true;
+        }
     }
 }
