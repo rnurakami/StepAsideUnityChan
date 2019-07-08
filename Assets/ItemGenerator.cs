@@ -15,6 +15,7 @@ public class ItemGenerator : MonoBehaviour
 
     void Start()
     {
+
         for (int i = startPos; i < goalPos; i += 15)
         {
             int num = Random.Range(1, 11);
